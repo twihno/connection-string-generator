@@ -73,11 +73,13 @@ impl PostgresConnectionString {
     ///
     /// # Examples
     /// ```rust
+    /// use connection_string_generator::postgres::PostgresConnectionString;
+    ///
     /// PostgresConnectionString::new()
     ///   .set_username_and_password("user", "password")
     ///   .set_host_with_port("localhost", 5432)
     ///   .set_database_name("db_name")
-    ///   .set_connect_timeout(30)
+    ///   .set_connect_timeout(30);
     /// ```
     pub fn new() -> Self {
         Self {
@@ -98,7 +100,9 @@ impl PostgresConnectionString {
     ///
     /// # Examples
     /// ```rust
-    /// PostgresConnectionString::new().set_username_without_password("user")
+    /// use connection_string_generator::postgres::PostgresConnectionString;
+    ///
+    /// PostgresConnectionString::new().set_username_without_password("user");
     /// ```
     pub fn set_username_without_password(self, username: &str) -> Self {
         self.set_userspec(UserSpec::Username(simple_percent_encode(username)))
@@ -108,7 +112,9 @@ impl PostgresConnectionString {
     ///
     /// # Examples
     /// ```rust
-    /// PostgresConnectionString::new().set_username_and_password("user", "password")
+    /// use connection_string_generator::postgres::PostgresConnectionString;
+    ///
+    /// PostgresConnectionString::new().set_username_and_password("user", "password");
     /// ```
     pub fn set_username_and_password(self, username: &str, password: &str) -> Self {
         self.set_userspec(UserSpec::UsernamePassword(UsernamePassword {
@@ -128,7 +134,9 @@ impl PostgresConnectionString {
     ///
     /// # Examples
     /// ```rust
-    /// PostgresConnectionString::new().set_host_with_default_port("localhost")
+    /// use connection_string_generator::postgres::PostgresConnectionString;
+    ///
+    /// PostgresConnectionString::new().set_host_with_default_port("localhost");
     /// ```
     pub fn set_host_with_default_port(self, host: &str) -> Self {
         self.set_hostspec(HostSpec::Host(simple_percent_encode(host)))
@@ -138,7 +146,9 @@ impl PostgresConnectionString {
     ///
     /// # Examples
     /// ```rust
-    /// PostgresConnectionString::new().set_host_with_port("localhost", 5432)
+    /// use connection_string_generator::postgres::PostgresConnectionString;
+    ///
+    /// PostgresConnectionString::new().set_host_with_port("localhost", 5432);
     /// ```
     pub fn set_host_with_port(self, host: &str, port: usize) -> Self {
         self.set_hostspec(HostSpec::HostPort(HostPort {
@@ -151,7 +161,9 @@ impl PostgresConnectionString {
     ///
     /// # Examples
     /// ```rust
-    /// PostgresConnectionString::new().set_database_name("db_name")
+    /// use connection_string_generator::postgres::PostgresConnectionString;
+    ///
+    /// PostgresConnectionString::new().set_database_name("db_name");
     /// ```
     pub fn set_database_name(mut self, db_name: &str) -> Self {
         self.database = Some(Database {
@@ -164,7 +176,9 @@ impl PostgresConnectionString {
     ///
     /// # Examples
     /// ```rust
-    /// PostgresConnectionString::new().set_connect_timeout(30)
+    /// use connection_string_generator::postgres::PostgresConnectionString;
+    ///
+    /// PostgresConnectionString::new().set_connect_timeout(30);
     /// ```
     pub fn set_connect_timeout(mut self, timeout: usize) -> Self {
         self.parameter_list
@@ -176,7 +190,9 @@ impl PostgresConnectionString {
     ///
     /// # Examples
     /// ```rust
-    /// PostgresConnectionString::new().dangerously_set_parameter("parameter", "value")
+    /// use connection_string_generator::postgres::PostgresConnectionString;
+    ///
+    /// PostgresConnectionString::new().dangerously_set_parameter("parameter", "value");
     /// ```
     pub fn dangerously_set_parameter(mut self, key: &str, value: &str) -> Self {
         self.parameter_list
