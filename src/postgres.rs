@@ -6,7 +6,7 @@ use crate::{HostPort, UsernamePassword};
 
 /// The `userspec` part of the connection string
 #[derive(Debug)]
-pub enum UserSpec {
+enum UserSpec {
     Username(String),
     UsernamePassword(UsernamePassword),
 }
@@ -24,7 +24,7 @@ impl Display for UserSpec {
 
 /// The `hostspec` part of the connection string
 #[derive(Debug)]
-pub enum HostSpec {
+enum HostSpec {
     Host(String),
     HostPort(HostPort),
 }
