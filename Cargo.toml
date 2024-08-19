@@ -9,7 +9,8 @@ description = """
 A VERY simple crate to generate database connection strings programmatically.
 """
 readme = "README.md"
-
+keywords = ["database", "database-connection", "connection-string"]
+categories = ["database"]
 
 [features]
 
