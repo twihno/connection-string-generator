@@ -2,7 +2,7 @@
 
 A VERY simple crate to generate database connection strings programmatically.
 
-## Supported databases
+## Currently supported databases
 
 - PostgreSQL
 

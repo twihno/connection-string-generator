@@ -1,3 +1,5 @@
+//! Connection string generator for PostgreSQL
+
 use std::{collections::HashMap, fmt::Display};
 
 use crate::{HostPort, UsernamePassword};
@@ -38,7 +40,7 @@ impl Display for HostSpec {
 
 /// The `database` part of the connection string
 #[derive(Debug)]
-pub struct Database {
+struct Database {
     db_name: String,
 }
 

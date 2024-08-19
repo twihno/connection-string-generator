@@ -1,3 +1,8 @@
+//! A VERY simple crate to generate database connection strings programmatically.
+//!
+//! # Currently supported databases
+//! - PostgreSQL
+
 #[cfg(feature = "postgres")]
 pub mod postgres;
 
