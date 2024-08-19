@@ -12,6 +12,9 @@ readme = "README.md"
 keywords = ["database", "database-connection", "connection-string"]
 categories = ["database"]
 
+[lints.rust]
+unsafe_code = "forbid"
+
 [features]
 
 default = ["full"]
