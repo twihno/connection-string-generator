@@ -1,0 +1,19 @@
+[package]
+name = "connection_string_generator"
+version = "0.1.0"
+edition = "2021"
+authors = ["Thomas Schuster <twihno@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/twihno/connection-string-generator"
+description = """
+A VERY simple crate to generate database connection strings programmatically.
+"""
+
+
+[features]
+
+default = ["full"]
+
+full = ["postgres"]
+
+postgres = []
