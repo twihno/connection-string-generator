@@ -8,6 +8,7 @@ repository = "https://github.com/twihno/connection-string-generator"
 description = """
 A VERY simple crate to generate database connection strings programmatically.
 """
+readme = "README.md"
 
 
 [features]
