@@ -284,7 +284,7 @@ mod test {
     use crate::postgres::PostgresConnectionString;
 
     #[test]
-    /// Test functionality of [simple_percent_encode]
+    /// Test functionality of [`simple_percent_encode`]
     fn test_simple_percent_encode() {
         assert_eq!(
             simple_percent_encode("!#$&'()*+,/:;=?@[]"),

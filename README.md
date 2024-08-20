@@ -5,6 +5,7 @@ A VERY simple crate to generate database connection strings programmatically.
 ## Currently supported databases
 
 - PostgreSQL
+- Microsoft SQL Server
 
 ## Examples
 

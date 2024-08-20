@@ -22,6 +22,7 @@ pedantic = "warn"
 
 default = ["full"]
 
-full = ["postgres"]
+full = ["postgres", "sqlserver"]
 
 postgres = []
+sqlserver = []

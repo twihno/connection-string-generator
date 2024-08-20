@@ -2,12 +2,19 @@
 //!
 //! # Currently supported databases
 //! - `PostgreSQL`
+//! - `Microsoft SQL Server`
 
 #[cfg(feature = "postgres")]
 pub mod postgres;
 
 #[cfg(feature = "postgres")]
 pub use postgres::PostgresConnectionString;
+
+#[cfg(feature = "sqlserver")]
+pub mod sqlserver;
+
+#[cfg(feature = "sqlserver")]
+pub use sqlserver::SqlServerConnectionString;
 
 /// Username & password bundled as struct
 #[derive(Debug)]
