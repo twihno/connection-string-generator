@@ -1,10 +1,13 @@
 //! A VERY simple crate to generate database connection strings programmatically.
 //!
 //! # Currently supported databases
-//! - PostgreSQL
+//! - `PostgreSQL`
 
 #[cfg(feature = "postgres")]
 pub mod postgres;
+
+#[cfg(feature = "postgres")]
+pub use postgres::PostgresConnectionString;
 
 /// Username & password bundled as struct
 #[derive(Debug)]

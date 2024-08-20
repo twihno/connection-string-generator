@@ -1,4 +1,4 @@
-//! Connection string generator for PostgreSQL
+//! Connection string generator for `PostgreSQL`
 
 use std::{collections::HashMap, fmt::Display};
 
@@ -50,8 +50,9 @@ impl Display for Database {
     }
 }
 
-/// Struct representing a PostgreSQL connection string
+/// Struct representing a `PostgreSQL` connection string
 #[derive(Debug)]
+#[allow(clippy::module_name_repetitions)]
 pub struct PostgresConnectionString {
     userspec: Option<UserSpec>,
     hostspec: Option<HostSpec>,
@@ -60,15 +61,16 @@ pub struct PostgresConnectionString {
 }
 
 impl Default for PostgresConnectionString {
+    #[must_use]
     fn default() -> Self {
         Self::new()
     }
 }
 
 impl PostgresConnectionString {
-    /// Creates a new and empty [PostgresConnectionString]
+    /// Creates a new and empty [`PostgresConnectionString`]
     ///
-    /// This function initializes a new [PostgresConnectionString] with empty values.
+    /// This function initializes a new [`PostgresConnectionString`] with empty values.
     /// Without any further changes this results in the string `postgres://` which isn't really useful.
     ///
     /// This function can be chained other functions to fill the missing fields in the connection string.
@@ -83,6 +85,7 @@ impl PostgresConnectionString {
     ///   .set_database_name("db_name")
     ///   .set_connect_timeout(30);
     /// ```
+    #[must_use]
     pub fn new() -> Self {
         Self {
             userspec: None,
@@ -93,6 +96,7 @@ impl PostgresConnectionString {
     }
 
     /// Replaces the userspec
+    #[must_use]
     fn set_userspec(mut self, userspec: UserSpec) -> Self {
         self.userspec = Some(userspec);
         self
@@ -106,6 +110,7 @@ impl PostgresConnectionString {
     ///
     /// PostgresConnectionString::new().set_username_without_password("user");
     /// ```
+    #[must_use]
     pub fn set_username_without_password(self, username: &str) -> Self {
         self.set_userspec(UserSpec::Username(simple_percent_encode(username)))
     }
@@ -118,6 +123,7 @@ impl PostgresConnectionString {
     ///
     /// PostgresConnectionString::new().set_username_and_password("user", "password");
     /// ```
+    #[must_use]
     pub fn set_username_and_password(self, username: &str, password: &str) -> Self {
         self.set_userspec(UserSpec::UsernamePassword(UsernamePassword {
             username: simple_percent_encode(username),
@@ -126,6 +132,7 @@ impl PostgresConnectionString {
     }
 
     /// Replaces the hostspec
+    #[must_use]
     fn set_hostspec(mut self, hostspec: HostSpec) -> Self {
         self.hostspec = Some(hostspec);
         self
@@ -140,6 +147,7 @@ impl PostgresConnectionString {
     ///
     /// PostgresConnectionString::new().set_host_with_default_port("localhost");
     /// ```
+    #[must_use]
     pub fn set_host_with_default_port(self, host: &str) -> Self {
         self.set_hostspec(HostSpec::Host(simple_percent_encode(host)))
     }
@@ -152,6 +160,7 @@ impl PostgresConnectionString {
     ///
     /// PostgresConnectionString::new().set_host_with_port("localhost", 5432);
     /// ```
+    #[must_use]
     pub fn set_host_with_port(self, host: &str, port: usize) -> Self {
         self.set_hostspec(HostSpec::HostPort(HostPort {
             host: simple_percent_encode(host),
@@ -167,6 +176,7 @@ impl PostgresConnectionString {
     ///
     /// PostgresConnectionString::new().set_database_name("db_name");
     /// ```
+    #[must_use]
     pub fn set_database_name(mut self, db_name: &str) -> Self {
         self.database = Some(Database {
             db_name: simple_percent_encode(db_name),
@@ -182,6 +192,7 @@ impl PostgresConnectionString {
     ///
     /// PostgresConnectionString::new().set_connect_timeout(30);
     /// ```
+    #[must_use]
     pub fn set_connect_timeout(mut self, timeout: usize) -> Self {
         self.parameter_list
             .insert(String::from("connect_timeout"), timeout.to_string());
@@ -196,6 +207,7 @@ impl PostgresConnectionString {
     ///
     /// PostgresConnectionString::new().dangerously_set_parameter("parameter", "value");
     /// ```
+    #[must_use]
     pub fn dangerously_set_parameter(mut self, key: &str, value: &str) -> Self {
         self.parameter_list
             .insert(simple_percent_encode(key), simple_percent_encode(value));
@@ -208,15 +220,15 @@ impl Display for PostgresConnectionString {
         let mut conn_string = String::from("postgres://");
 
         if let Some(userspec) = &self.userspec {
-            conn_string.push_str(&userspec.to_string())
+            conn_string.push_str(&userspec.to_string());
         }
 
         if let Some(hostspec) = &self.hostspec {
-            conn_string.push_str(&hostspec.to_string())
+            conn_string.push_str(&hostspec.to_string());
         }
 
         if let Some(database) = &self.database {
-            conn_string.push_str(&database.to_string())
+            conn_string.push_str(&database.to_string());
         }
 
         if !self.parameter_list.is_empty() {
@@ -226,7 +238,7 @@ impl Display for PostgresConnectionString {
                 .map(|(key, value)| format!("{key}={value}"))
                 .collect();
 
-            conn_string.push_str(&format!("?{}", parameters.join("&")))
+            conn_string.push_str(&format!("?{}", parameters.join("&")));
         }
 
         write!(f, "{conn_string}")
@@ -255,11 +267,11 @@ const PERCENT_REPLACEMENTS: [(char, &str); 18] = [
 ];
 
 /// Replaces reserved characters with their encoded versions
-/// (https://en.wikipedia.org/wiki/Percent-encoding -> Reserved characters)
+/// (<https://en.wikipedia.org/wiki/Percent-encoding#Reserved_characters>)
 fn simple_percent_encode(s: &str) -> String {
     let mut s = s.to_string();
 
-    for replacement in PERCENT_REPLACEMENTS.iter() {
+    for replacement in &PERCENT_REPLACEMENTS {
         s = s.replace(replacement.0, replacement.1);
     }
 

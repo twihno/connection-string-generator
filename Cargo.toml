@@ -15,6 +15,9 @@ categories = ["database"]
 [lints.rust]
 unsafe_code = "forbid"
 
+[lints.clippy]
+pedantic = "warn"
+
 [features]
 
 default = ["full"]
