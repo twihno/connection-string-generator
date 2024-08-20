@@ -37,7 +37,8 @@ impl SqlServerConnectionString {
     ///   .set_username_and_password("user", "password")
     ///   .set_host_with_port("localhost", 5432)
     ///   .set_database_name("db_name")
-    ///   .set_connect_timeout(30);
+    ///   .set_connect_timeout(30)
+    ///   .enable_encryption_and_trust_server_certificate();
     /// ```
     #[must_use]
     pub fn new() -> Self {
