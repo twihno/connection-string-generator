@@ -236,7 +236,7 @@ impl SqlServerConnectionString {
 
     /// Sets/Replaces the connection retry interval (in seconds)
     ///
-    /// Allowed values: 1..=60 . The value will be increased/decreased to fit this range
+    /// Allowed values: 1..=60 . The provided value will be increased/decreased to fit this range
     ///
     /// Parameters: `ConnectRetryInterval=<connect_retry_interval>`
     ///
