@@ -203,7 +203,7 @@ impl SqlServerConnectionString {
     ///
     /// If the provided value is negative, the action will be ignored
     ///
-    /// Parameters: `Command Timeout=<command_timeout>`
+    /// Parameters: `command timeout=<command_timeout>`
     ///
     /// # Examples
     /// ```rust
@@ -221,7 +221,7 @@ impl SqlServerConnectionString {
 
     /// Sets/Replaces the connection retry count
     ///
-    /// Parameters: `ConnectRetryCount=<connect_retry_count>`
+    /// Parameters: `connectRetryCount=<connect_retry_count>`
     ///
     /// # Examples
     /// ```rust
@@ -238,7 +238,7 @@ impl SqlServerConnectionString {
     ///
     /// Allowed values: 1..=60 . The provided value will be increased/decreased to fit this range
     ///
-    /// Parameters: `ConnectRetryInterval=<connect_retry_interval>`
+    /// Parameters: `connectRetryInterval=<connect_retry_interval>`
     ///
     /// # Examples
     /// ```rust
