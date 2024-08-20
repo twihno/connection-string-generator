@@ -184,7 +184,7 @@ impl PostgresConnectionString {
         self
     }
 
-    /// Sets/Replaces the connection timeout in seconds
+    /// Sets/Replaces the connect timeout in seconds
     ///
     /// # Examples
     /// ```rust

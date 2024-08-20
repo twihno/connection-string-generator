@@ -177,25 +177,25 @@ impl SqlServerConnectionString {
         self.dangerously_set_parameter("database", db_name)
     }
 
-    /// Sets/Replaces the connection timeout (in seconds)#
+    /// Sets/Replaces the connect timeout (in seconds)
     ///
     /// If the provided value is negative, the action will be ignored
     ///
-    /// Parameters: `timeout=<connection_timeout>`
+    /// Parameters: `timeout=<connect_timeout>`
     ///
     /// # Examples
     /// ```rust
     /// use connection_string_generator::sqlserver::SqlServerConnectionString;
     ///
-    /// SqlServerConnectionString::new().set_connection_timeout(30);
+    /// SqlServerConnectionString::new().set_connect_timeout(30);
     /// ```
     #[must_use]
-    pub fn set_connection_timeout(self, connection_timeout: i32) -> Self {
-        if connection_timeout < 0 {
+    pub fn set_connect_timeout(self, connect_timeout: i32) -> Self {
+        if connect_timeout < 0 {
             return self;
         }
 
-        self.dangerously_set_parameter("timeout", &connection_timeout.to_string())
+        self.dangerously_set_parameter("timeout", &connect_timeout.to_string())
     }
 
     /// Sets/Replaces the command timeout (in seconds)
@@ -443,21 +443,21 @@ mod test {
         assert_eq!(&conn_string.to_string(), "database=DbName");
     }
 
-    /// Test connection timeout
+    /// Test connect timeout
     #[test]
-    fn test_set_connection_timeout() {
+    fn test_set_connect_timeout() {
         let conn_string = SqlServerConnectionString::new();
 
         // Negative value => ignored
-        let conn_string = conn_string.set_connection_timeout(-2);
+        let conn_string = conn_string.set_connect_timeout(-2);
         assert_eq!(&conn_string.to_string(), "");
 
         // Normal value
-        let conn_string = conn_string.set_connection_timeout(30);
+        let conn_string = conn_string.set_connect_timeout(30);
         assert_eq!(&conn_string.to_string(), "timeout=30");
 
         // Negative value => ignored
-        let conn_string = conn_string.set_connection_timeout(-2);
+        let conn_string = conn_string.set_connect_timeout(-2);
         assert_eq!(&conn_string.to_string(), "timeout=30");
     }
 
